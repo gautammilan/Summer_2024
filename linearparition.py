@@ -19,38 +19,6 @@ def get_value(i,j, seq):
 
 NEG_INF = float('-inf')
 
-def main():
-    print(len(seq))
-    parser = argparse.ArgumentParser(description="Calculate RNA folding probabilities.")
-    parser.add_argument("--sequence",required=False, default=seq, type=str, help="The RNA sequence.")
-    parser.add_argument("--log", type=bool, default=False, help="Boolean value indicating whether to use log semiring.")
-    parser.add_argument("--beam_size", type=int, help="Beam size for the algorithm.")
-    args = parser.parse_args()
-
-    if args.seq=="":
-        print("\nNOTE: Sequence not provided will use the default=="": covid sequence")
-    else:
-        seq= args.sequence
-    n= len(seq)
-    print("The length of sequence", len(n))
-    if args.log:
-        print("\nWITH LOG Semiring")
-        Q = log_inside(seq, args.beam_size)
-        p, Q_out = log_outside(seq, Q)
-        for key,value in p.items():
-            p[key]= math.exp(value)
-
-    else:
-        print("\nWITHOUT LOG Semiring")
-        Q = inside(seq, args.beam_size)
-        p, Q_out = outside(seq, Q)
-    
-    print("\nVERIFICATION")
-    print("Q[1][n]: ", Q[n][1], "Q[1][0]: ",Q_out[1,0])
-    
-    print("\n*************************\n")
-    print("BBP")
-    print(dict(p))
 def logsum(x, y):
     if x < y:
         x, y = y, x  # Swapping x and y

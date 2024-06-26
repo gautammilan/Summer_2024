@@ -11,8 +11,8 @@ VALID= {"AU", "UA", "CG", "GC", "GU", "UG"}
 def get_value(i,j, seq):
     i,j= i-1,j-1
 
-    if seq[i]+seq[j] in ["AU", "UA"]: return True, -1
-    elif seq[i]+seq[j] in ["CG", "GC"]: return True, -1
+    if seq[i]+seq[j] in ["AU", "UA"]: return True, -2
+    elif seq[i]+seq[j] in ["CG", "GC"]: return True, -3
     elif seq[i]+seq[j] in ["GU", "UG"]: return True, -1
     else: return False, None
 

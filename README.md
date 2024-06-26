@@ -7,6 +7,8 @@ Let's think of each span in the sequence as a vertex "v". The reason behind Q_1,
 structures that decompose to vertex v for the span from 1 to 0, which is equivalent to the sum of all the energy structures given by the partition function Q1,n. Hence, Q_1,0 equals Q1,n.
 
 5. Base-pairing probabilities: Verified when T close to 0 (i,j) belongs to MFE, then pij is close to 1.
+
+6. stochastic sampling: Verified 
    
 
 

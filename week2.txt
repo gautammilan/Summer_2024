@@ -1,0 +1,55 @@
+1. One nonterminal for Nussinov
+S -> epsilon
+S -> Sa | Su | Sc | Sg
+S -> SaSu | SuSa | ScSg | SgSc | SuSg | SgSu
+ 
+
+2. One nonterminal for CKY
+S -> epsilon 
+S -> aSu | uSa | cSg | gSc | uSg | gSu
+S -> SaSu | SuSa | ScSg | SgSc | SuSg | SgSu
+
+3. Two nonterminal for Nussinov
+S -> epsilon 
+S -> Sa | Su | Sc | Sg
+S -> SP
+
+P -> aSu | uSa | cSg | gSc | uSg | gSu
+
+
+4. Inside outside
+
+Inside:
+n <- length of x
+S <- hash()
+P <- hash()
+
+Sj,j-1 <-1 for all j in 1..n   
+for j =1..n do
+    for each i such that [i,j-1] in S do:
+        Si,j += Si,j-1*e(-delta(x,j)/RT)
+
+        if i-1 and j in {AU, UA, CG, GC, GU, UG} then:
+            Pi-1,j= Si,j-1 * e(-delta(x,i-1,j)/RT)
+            for each k such that [k,i-2] in S:
+                Sk,j += Sk,i-2* Pi-1,j
+    BeamPrune(S,j,b)
+return S,P
+
+Outside:
+function BasePairingProbs(x,S,P)
+    n <- length fo x
+    S_ <- hash()
+    P_ <- hash()
+    prob_ <- hash()
+    S_1,n <- 1
+    
+    for j=n downto 1 do
+        for each i such that [i,j-1] in S do:
+            S_i,j-1 += S_i,j * e(-(delta(x,j)/RT))
+            if i-1 and j in {AU, UA, CG, GC, GU, UG} then:
+                for each k such that [k,i-2] in S do:
+                    S_k,i-2 += Pi-1,j * S_k,j
+                    P_i-1,j += Sk,1-2* S_k,j
+                    prob_i-1,j += Pi-1,j * P_i-1,j/S1,n
+    return prob
